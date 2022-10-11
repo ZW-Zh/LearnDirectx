@@ -37,7 +37,6 @@ bool Running = true;
 // create a window
 bool InitializeWindow(HINSTANCE hInstance,
 	int ShowWnd,
-	int width, int height,
 	bool fullscreen);
 
 // main application loop
