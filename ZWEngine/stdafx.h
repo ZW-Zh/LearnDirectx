@@ -12,6 +12,8 @@
 #include "d3dx12.h"
 #include <string>
 
+using namespace DirectX;
+
 // this will only call release if an object exists (prevents exceptions calling release on non existant objects)
 #define SAFE_RELEASE(p) { if ( (p) ) { (p)->Release(); (p) = 0; } }
 
@@ -108,3 +110,18 @@ D3D12_INDEX_BUFFER_VIEW indexBufferView; // a structure holding information abou
 
 ID3D12Resource* depthStencilBuffer; // This is the memory for our depth buffer. it will also be used for a stencil buffer in a later tutorial
 ID3D12DescriptorHeap* dsDescriptorHeap; // This is a heap for our depth/stencil buffer descriptor
+
+
+struct ConstantBuffer
+{
+	XMFLOAT4 colorMultiplier;
+};
+
+ID3D12DescriptorHeap* mainDescriptorHeap[frameBufferCount]; // this heap will store the descripor to our constant buffer
+ID3D12Resource* constantBufferUploadHeap[frameBufferCount]; // this is the memory on the gpu where our constant buffer will be placed.
+
+ConstantBuffer cbColorMultiplierData; // this is the constant buffer data we will send to the gpu 
+// (which will be placed in the resource we created above)
+
+UINT8* cbColorMultiplierGPUAddress[frameBufferCount]; // this is a pointer to the memory location we get when we map our constant buffer
+
