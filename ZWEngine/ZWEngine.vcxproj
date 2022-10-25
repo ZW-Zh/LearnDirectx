@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="D3DApp.h" />
     <ClInclude Include="d3dx12.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Resource.h" />
@@ -140,6 +141,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="D3DApp.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

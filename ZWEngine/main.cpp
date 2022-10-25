@@ -169,10 +169,6 @@ LRESULT CALLBACK WndProc(HWND hwnd,
         lParam);
 }
 
-
-
-
-
 bool InitD3D()
 {
     HRESULT hr;
@@ -322,20 +318,6 @@ bool InitD3D()
         // we increment the rtv handle by the rtv descriptor size we got above
         rtvHandle.Offset(1, rtvDescriptorSize);
     }
-
-    // create cbv Descriptor Heap
-    /*for (int i = 0; i < frameBufferCount; ++i)
-    {
-        D3D12_DESCRIPTOR_HEAP_DESC heapDesc = {};
-        heapDesc.NumDescriptors = 1;
-        heapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
-        heapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
-        hr = device->CreateDescriptorHeap(&heapDesc, IID_PPV_ARGS(&mainDescriptorHeap[i]));
-        if (FAILED(hr))
-        {
-            Running = false;
-        }
-    }*/
 
     // -- Create the Command Allocators -- //
     for (int i = 0; i < frameBufferCount; i++)
@@ -643,13 +625,13 @@ bool InitD3D()
     vertexData.pData = reinterpret_cast<BYTE*>(vList); // pointer to our vertex array
     vertexData.RowPitch = vBufferSize; // size of all our triangle vertex data
     vertexData.SlicePitch = vBufferSize; // also the size of our triangle vertex data
-
+   
 
     // we are now creating a command with the command list to copy the data from
     // the upload heap to the default heap
     UpdateSubresources(commandList, vertexBuffer, vBufferUploadHeap, 0, 0, 1, &vertexData);
  
-    // transition the vertex buffer data from copy destination state to vertex buffer state
+    // transition the vertex buffer data from copy destination state to vertex buffer state 会隐式从common提升到copy
     commandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(vertexBuffer, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER));
    
     // Create index buffer
@@ -720,7 +702,6 @@ bool InitD3D()
 
     // transition the vertex buffer data from copy destination state to vertex buffer state
     commandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(indexBuffer, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER));
-
 
     // Create the depth/stencil buffer
 

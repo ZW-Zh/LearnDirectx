@@ -147,4 +147,3 @@ XMFLOAT4X4 cube2RotMat; // this will keep track of our rotation for the second c
 XMFLOAT4 cube2PositionOffset; // our second cube will rotate around the first cube, so this is the position offset from the first cube
 
 int numCubeIndices; // the number of indices to draw the cube
-
